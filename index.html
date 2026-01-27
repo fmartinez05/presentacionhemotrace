@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hemotrace - Bioanálisis Inteligente</title>
+    <title>HEMOTRACE - CONCURSO IDEAS UGR</title>
     
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -13,29 +13,37 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ESTÉTICA CLEAN / THIN FONTS --- */
+        /* --- ESTÉTICA CLEAN / THIN FONTS (AJUSTADA: MÁS LEGIBLE) --- */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #FAFAFA;
             color: #1d1d1f;
-            font-weight: 300; /* Letra fina por defecto */
+            font-weight: 400; /* ANTES 300: Ahora es normal para mejor lectura */
             overflow-x: hidden;
             margin: 0;
             padding: 0;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Títulos muy finos pero elegantes */
+        /* Títulos finos pero con más cuerpo que antes */
         h1, h2, h3, h4 {
-            font-weight: 200; 
-            letter-spacing: -0.03em;
+            font-weight: 300; /* ANTES 200: Un poco más grueso pero elegante */
+            letter-spacing: -0.02em;
         }
 
         strong, .font-bold {
-            font-weight: 500; /* Redefinimos bold para que no sea muy grueso en Poppins */
+            font-weight: 600; /* ANTES 500: Para resaltar sobre el texto normal */
+        }
+
+        /* ESTILO DE SUBRAYADO ELEGANTE */
+        u {
+            text-decoration: underline;
+            text-decoration-color: #94a3b8; /* Gris azulado suave */
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px; /* Separado del texto para elegancia */
         }
 
         /* Ocultar scrollbar estándar */
@@ -74,7 +82,7 @@
             background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 400; /* Un poco más de peso para que el gradiente se vea bien */
+            font-weight: 500; 
         }
         
         .text-gradient-gold {
@@ -126,15 +134,13 @@
             useEffect(() => {
                 const observer = new IntersectionObserver(([entry]) => {
                     if (entry.isIntersecting) {
-                        // Reproducir cuando entra en pantalla
                         if (videoRef.current) {
                             videoRef.current.play().catch(error => console.log("Autoplay prevenido por navegador:", error));
                         }
                     } else {
-                        // Pausar cuando sale
                         if (videoRef.current) videoRef.current.pause();
                     }
-                }, { threshold: 0.5 }); // Se activa cuando el 50% del video es visible
+                }, { threshold: 0.5 }); 
 
                 if (videoRef.current) observer.observe(videoRef.current);
                 return () => { if (videoRef.current) observer.unobserve(videoRef.current); };
@@ -147,8 +153,8 @@
                     poster={poster}
                     className={className}
                     controls
-                    muted        // Necesario para autoplay en la mayoría de navegadores modernos
-                    playsInline  // Necesario para iOS
+                    muted        
+                    playsInline  
                     loop
                 >
                     Tu navegador no soporta video HTML5.
@@ -165,11 +171,9 @@
             </nav>
         );
 
-        // --- HERO (MODIFICADO: Espaciado reducido) ---
+        // --- HERO ---
         const Hero = () => {
             return (
-                // Se cambió 'items-center' por 'items-start' y 'pt-20' por 'pt-28 md:pt-40'
-                // Esto fuerza al contenido a subir y quedarse fijo arriba, eliminando el hueco central.
                 <section className="relative min-h-screen flex items-start pt-28 md:pt-40 overflow-hidden bg-white">
                     <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-blue-50 rounded-full blur-[120px] -z-10 opacity-60"></div>
                     <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-50 rounded-full blur-[100px] -z-10 opacity-60"></div>
@@ -181,15 +185,17 @@
                                 <div className="space-y-6">
                                     <p className="text-blue-600 font-medium tracking-wide uppercase text-xs">Universidad de Granada | Concurso de ideas 2026</p>
                                     
-                                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-thin tracking-tight leading-[1.1] text-[#1d1d1f]">
+                                    {/* Se cambia font-thin a font-light */}
+                                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1] text-[#1d1d1f]">
                                         Análisis de hemogramas inteligente<br/> 
                                     </h1>
                                     
-                                    <p className="text-lg text-gray-500 max-w-lg leading-relaxed font-light">
-                                        Transformando los datos complejos de un hemograma en conclusiones claras.
+                                    {/* Se cambia font-light a font-normal */}
+                                    <p className="text-lg text-gray-500 max-w-lg leading-relaxed font-normal">
+                                        Transformando los datos complejos de un hemograma en <u>conclusiones claras</u>.
                                     </p>
                                     
-                                    <p> <span className="text-black font-normal">Apoyo, organización y eficiencia</span> para profesionales sanitarios
+                                    <p> <span className="text-black font-medium">Apoyo, organización y eficiencia</span> para profesionales sanitarios
                                     </p>
                                 </div>
                             </Reveal>
@@ -220,30 +226,31 @@
 
         // --- PROBLEMA ---
         const ProblemSection = () => {
+            // Nota: Convertimos el contenido a JSX para poder usar <u>
             const problems = [
                 {
                     id: 1,
                     title: "Complejidad del hemograma",
                     subtitle: "Exceso de parámetros y relaciones.",
-                    content: "Un hemograma no son solo números. Glóbulos rojos, hemoglobina, VCM, HCM, Leucocitos... Lo vital no es el valor aislado, sino la relación entre ellos. Pequeñas variaciones combinadas indican patologías que el ojo humano puede tardar en detectar."
+                    content: <>Un hemograma no son solo números. Glóbulos rojos, hemoglobina, VCM, HCM... Lo vital no es el valor aislado, sino la <u>relación entre ellos</u>. Pequeñas variaciones combinadas indican patologías que el ojo humano puede tardar en detectar.</>
                 },
                 {
                     id: 2,
                     title: "Tiempo limitado",
                     subtitle: "La consulta médica es rápida",
-                    content: "Los médicos tienen minutos por paciente. En atención primaria a menudo solo se miran valores 'fuera de rango'. Esto provoca que patrones sutiles o cambios progresivos pasen desapercibidos hasta que es tarde."
+                    content: <>Los médicos tienen minutos por paciente. En atención primaria a menudo solo se miran <u>valores 'fuera de rango'</u>. Esto provoca que patrones sutiles o cambios progresivos pasen desapercibidos hasta que es tarde.</>
                 },
                 {
                     id: 3,
                     title: "Patrones invisibles",
                     subtitle: "Conclusiones obtenidas de correlaciones de datos",
-                    content: "Anemias específicas, procesos inflamatorios crónicos o alteraciones de médula ósea presentan combinaciones complejas. La IA es superior detectando estas correlaciones en miles de casos simultáneamente."
+                    content: <>Anemias específicas, procesos inflamatorios crónicos o alteraciones complejas. La IA es superior <u>detectando estas correlaciones</u> en miles de casos simultáneamente.</>
                 },
                 {
                     id: 4,
                     title: "Ansiedad del Paciente",
-                    subtitle: "Largos tiempos de espera para: ¿Esto es grave? ¿Por qué está bajo?",
-                    content: "El informe de laboratorio es técnico e incomprensible. Genera ansiedad y búsquedas erróneas en internet. Hemotrace traduce este lenguaje técnico para el paciente, sin sustituir al médico."
+                    subtitle: "Largos tiempos de espera",
+                    content: <>El informe de laboratorio es técnico e incomprensible. Genera ansiedad y búsquedas erróneas en internet. Hemotrace <u>traduce este lenguaje técnico</u> para el paciente, sin sustituir al médico.</>
                 }
             ];
 
@@ -252,8 +259,10 @@
                     <div className="max-w-7xl mx-auto">
                         <Reveal>
                             <div className="mb-24 md:mb-32">
-                                <h2 className="text-3xl md:text-5xl font-thin text-black mb-6 tracking-tight">Problema actual.</h2>
-                                <p className="text-xl md:text-2xl text-gray-500 max-w-3xl font-light">
+                                {/* font-thin -> font-light */}
+                                <h2 className="text-3xl md:text-5xl font-light text-black mb-6 tracking-tight">Problema actual.</h2>
+                                {/* font-light -> font-normal */}
+                                <p className="text-xl md:text-2xl text-gray-500 max-w-3xl font-normal">
                                     Los médicos son grandes profesionales, pero con herramientas actuales su trabajo puede ser aun más eficiente.
                                 </p>
                             </div>
@@ -265,9 +274,11 @@
                                     <Reveal key={p.id}>
                                         <div className="group pl-4 border-l border-gray-300 hover:border-black transition-colors duration-500">
                                             <div className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-widest">Desafío {p.id}</div>
-                                            <h3 className="text-2xl font-light text-black mb-3">{p.title}</h3>
-                                            <h4 className="text-lg text-blue-600 font-normal mb-4">{p.subtitle}</h4>
-                                            <p className="text-gray-600 leading-relaxed text-base font-light">
+                                            {/* font-light -> font-normal */}
+                                            <h3 className="text-2xl font-normal text-black mb-3">{p.title}</h3>
+                                            <h4 className="text-lg text-blue-600 font-medium mb-4">{p.subtitle}</h4>
+                                            {/* font-light -> font-normal, text-base para lectura sólida */}
+                                            <p className="text-gray-600 leading-relaxed text-base font-normal">
                                                 {p.content}
                                             </p>
                                         </div>
@@ -289,8 +300,9 @@
                                             <div className="flex justify-between text-gray-600"><span>Transferrina</span> <span className="text-orange-500 font-bold">16.5 % ↑</span></div>
                                         </div>
                                     </div>
-                                    <h3 className="text-2xl font-light text-black mb-4 z-10">La barrera de interpretación</h3>
-                                    <p className="text-gray-500 max-w-xs z-10 font-light">
+                                    {/* font-light -> font-normal */}
+                                    <h3 className="text-2xl font-normal text-black mb-4 z-10">La barrera de interpretación</h3>
+                                    <p className="text-gray-500 max-w-xs z-10 font-normal">
                                         Sin hemotrace.com correlacionar estos datos requiere de conocimiento específico y genera incertidumbre.
                                     </p>
                                 </div>
@@ -309,10 +321,12 @@
                         <Reveal>
                             <div className="text-center mb-24">
                                 <span className="text-blue-600 font-bold tracking-wider uppercase text-xs">Nuestra Solución</span>
-                                <h2 className="text-4xl md:text-6xl font-thin tracking-tight mt-4 mb-8 text-black">
+                                {/* font-thin -> font-light */}
+                                <h2 className="text-4xl md:text-6xl font-light tracking-tight mt-4 mb-8 text-black">
                                     Hemotrace.com
                                 </h2>
-                                <p className="text-xl md:text-2xl text-gray-500 max-w-3xl mx-auto font-light">
+                                {/* font-light -> font-normal */}
+                                <p className="text-xl md:text-2xl text-gray-500 max-w-3xl mx-auto font-normal">
                                     Una plataforma de IA diseñada para transformar informes analíticos complejos en conclusiones claras y rápidas. Apoyo para médicos y pacientes.
                                 </p>
                             </div>
@@ -320,16 +334,29 @@
 
                         <div className="grid md:grid-cols-3 gap-8 mb-32">
                             {[
-                                {icon: "📊", title: "1. Datos estructurados", desc: "La inteligencia artificial está entrenada para analizar datos biosanitarios: glóbulos rojos, blancos, plaquetas, etc. Entrenada para detectar patrones patológicos"},
-                                {icon: "🧠", title: "2. Machine learning", desc: "Inteligencia artificial entrenada en multitud de patologías para aprender patrones de variación y correlaciones."},
-                                {icon: "🎯", title: "3. Predicción", desc: "Ayuda clave en el diagnóstico predictivo. La IA sugiere patrones (anemia, infección, inflamación) y tendencias futuras, traduciendo la complejidad."}
+                                {
+                                    icon: "📊", 
+                                    title: "1. Datos estructurados", 
+                                    content: <>La inteligencia artificial está entrenada para analizar datos biosanitarios. Entrenada para <u>detectar patrones patológicos</u> que escapan a la vista.</>
+                                },
+                                {
+                                    icon: "🧠", 
+                                    title: "2. Machine learning", 
+                                    content: <>Inteligencia artificial entrenada en multitud de patologías para aprender <u>patrones de variación y correlaciones</u> entre cientos de variables.</>
+                                },
+                                {
+                                    icon: "🎯", 
+                                    title: "3. Predicción", 
+                                    content: <>Ayuda clave en el diagnóstico predictivo. La IA <u>sugiere patrones</u> (anemia, infección, inflamación) y tendencias futuras.</>
+                                }
                             ].map((item, index) => (
                                 <Reveal key={index} delay={index * 100}>
                                     <div className="h-full p-10 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 hover:shadow-xl transition-all duration-300">
                                         <div className="text-4xl mb-6">{item.icon}</div>
                                         <h3 className="text-xl font-medium mb-3 text-black">{item.title}</h3>
-                                        <p className="text-gray-500 text-sm leading-relaxed font-light">
-                                            {item.desc}
+                                        {/* font-light -> font-normal */}
+                                        <p className="text-gray-500 text-sm leading-relaxed font-normal">
+                                            {item.content}
                                         </p>
                                     </div>
                                 </Reveal>
@@ -338,7 +365,8 @@
 
                         <Reveal>
                             <div className="relative">
-                                <h3 className="text-2xl font-light mb-8 text-center">Demo de Funcionamiento</h3>
+                                {/* font-light -> font-normal */}
+                                <h3 className="text-2xl font-normal mb-8 text-center">Demo de Funcionamiento</h3>
                                 <div className="aspect-video w-full bg-black rounded-3xl overflow-hidden shadow-2xl border border-gray-200 relative">
                                     <AutoPlayVideo 
                                         src="video1.mp4" 
@@ -364,9 +392,11 @@
                             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                                 <div>
                                     <span className="text-blue-400 font-bold tracking-wider uppercase text-xs">Deep Dive</span>
-                                    <h2 className="text-4xl md:text-6xl font-thin mt-2">Ejemplo Práctico.</h2>
+                                    {/* font-thin -> font-light */}
+                                    <h2 className="text-4xl md:text-6xl font-light mt-2">Ejemplo Práctico.</h2>
                                 </div>
-                                <p className="text-gray-400 max-w-md text-lg text-right md:text-left font-light">
+                                {/* font-light -> font-normal */}
+                                <p className="text-gray-400 max-w-md text-lg text-right md:text-left font-normal">
                                     Observa cómo el sistema detecta correlaciones que pasarían desapercibidas en una revisión rutinaria rápida.
                                 </p>
                             </div>
@@ -384,15 +414,15 @@
                             <div className="grid md:grid-cols-3 gap-6 mt-12">
                                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                                     <h4 className="font-medium text-white mb-2">Análisis en Tiempo Real</h4>
-                                    <p className="text-sm text-gray-400 font-light">Procesamiento inmediato al subir el archivo PDF o introducir valores manuales.</p>
+                                    <p className="text-sm text-gray-400 font-normal">Procesamiento inmediato al subir el archivo PDF o introducir valores manuales.</p>
                                 </div>
                                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                                     <h4 className="font-medium text-white mb-2">Explicación Natural</h4>
-                                    <p className="text-sm text-gray-400 font-light">Generación de lenguaje natural (NLG) para explicar el "por qué" de la alerta.</p>
+                                    <p className="text-sm text-gray-400 font-normal">Generación de lenguaje natural (NLG) para explicar el "por qué" de la alerta.</p>
                                 </div>
                                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                                     <h4 className="font-medium text-white mb-2">Seguimiento Evolutivo</h4>
-                                    <p className="text-sm text-gray-400 font-light">Comparativa automática con analíticas previas del mismo paciente.</p>
+                                    <p className="text-sm text-gray-400 font-normal">Comparativa automática con analíticas previas del mismo paciente.</p>
                                 </div>
                             </div>
                         </Reveal>
@@ -409,19 +439,22 @@
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-700 font-bold text-xs uppercase tracking-wide mb-8">
                             ⚠️ Aviso Legal Importante
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-8">Lo que NO hace Hemotrace</h2>
+                        {/* font-light -> font-normal */}
+                        <h2 className="text-3xl md:text-4xl font-normal text-slate-900 mb-8">Lo que NO hace Hemotrace</h2>
                         
                         <div className="grid md:grid-cols-2 gap-8 text-left">
                             <div className="bg-white p-8 rounded-3xl shadow-sm border border-red-100">
                                 <h3 className="text-xl font-medium text-slate-900 mb-3">❌ No Diagnostica</h3>
-                                <p className="text-slate-600 text-sm leading-relaxed font-light">
-                                    Hemotrace no explora el historial personal del paciente. Solo analiza números y los relaciona con datos cedidos por el paciente. Puede sugerir patrones, pero <strong>nunca confirmar una enfermedad</strong>.
+                                {/* font-light -> font-normal */}
+                                <p className="text-slate-600 text-sm leading-relaxed font-normal">
+                                    Hemotrace no explora el historial personal del paciente. Solo analiza números y los relaciona con datos cedidos por el paciente. Puede sugerir patrones, pero <u>nunca confirmar una enfermedad</u>.
                                 </p>
                             </div>
                             <div className="bg-white p-8 rounded-3xl shadow-sm border border-red-100">
                                 <h3 className="text-xl font-medium text-slate-900 mb-3">🗑️ Calidad del Dato</h3>
-                                <p className="text-slate-600 text-sm leading-relaxed font-light">
-                                    "Basura entra → basura sale". Si el laboratorio introduce mal los datos o las unidades, la IA fallará. Dependemos 100% de la calidad del input.
+                                {/* font-light -> font-normal */}
+                                <p className="text-slate-600 text-sm leading-relaxed font-normal">
+                                    "Basura entra → basura sale". Si el laboratorio introduce mal los datos o las unidades, <u>la IA fallará</u>. Dependemos 100% de la calidad del input.
                                 </p>
                             </div>
                         </div>
@@ -441,8 +474,9 @@
                                     <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                                     Privacidad y seguridad
                                 </div>
-                                <h2 className="text-3xl md:text-5xl font-thin text-black mb-6 tracking-tight">Políticas de privacidad</h2>
-                                <p className="text-xl text-gray-500 font-light">No necesita identificar al usuario.</p>
+                                {/* font-thin -> font-light */}
+                                <h2 className="text-3xl md:text-5xl font-light text-black mb-6 tracking-tight">Políticas de privacidad</h2>
+                                <p className="text-xl text-gray-500 font-normal">No necesita identificar al usuario.</p>
                             </div>
                         </Reveal>
 
@@ -450,7 +484,8 @@
                             <Reveal delay={100}>
                                 <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 h-full flex flex-col justify-center">
                                     <h3 className="text-lg font-medium text-gray-900 mb-6">En principio, la plataforma:</h3>
-                                    <ul className="space-y-4 font-light">
+                                    {/* font-light -> font-normal */}
+                                    <ul className="space-y-4 font-normal">
                                         {[
                                             "No necesita nombre real",
                                             "No necesita DNI",
@@ -473,8 +508,9 @@
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -z-10"></div>
                                     <div className="text-5xl mb-6">🛡️</div>
                                     <h3 className="text-xl font-medium text-gray-900 mb-4">Riesgo Mínimo</h3>
-                                    <p className="text-gray-500 leading-relaxed font-light">
-                                        Esto reduce el riesgo directo de identificación. Priorizamos el análisis de datos puros.
+                                    {/* font-light -> font-normal */}
+                                    <p className="text-gray-500 leading-relaxed font-normal">
+                                        Esto reduce el riesgo directo de identificación. Priorizamos el <u>análisis de datos puros</u>.
                                     </p>
                                 </div>
                             </Reveal>
@@ -482,7 +518,8 @@
 
                         <Reveal delay={300}>
                             <div className="bg-blue-600 rounded-3xl p-8 md:p-10 text-white text-center shadow-xl shadow-blue-900/20">
-                                <p className="text-lg md:text-xl font-light leading-relaxed">
+                                {/* font-light -> font-normal */}
+                                <p className="text-lg md:text-xl font-normal leading-relaxed">
                                     👉 Analizar datos <span className="font-bold underline decoration-blue-300 underline-offset-4">sin identidad explícita</span> es siempre mejor que hacerlo con identidad completa.
                                 </p>
                             </div>
@@ -514,7 +551,8 @@
                     <div className="max-w-7xl mx-auto">
                         <Reveal>
                             <div className="mb-32 text-center">
-                                <h2 className="text-4xl font-thin text-black mb-16 tracking-tight">Equipo universitario</h2>
+                                {/* font-thin -> font-light */}
+                                <h2 className="text-4xl font-light text-black mb-16 tracking-tight">Equipo universitario</h2>
                                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
                                     {team.map((m, i) => (
                                         <div key={i} className="group cursor-default">
@@ -527,7 +565,8 @@
                                             </div>
                                             <h4 className="text-xl font-medium text-black">{m.name}</h4>
                                             <p className="text-blue-600 text-sm font-medium mb-2">{m.role}</p>
-                                            <p className="text-gray-500 text-sm font-light">{m.desc}</p>
+                                            {/* font-light -> font-normal */}
+                                            <p className="text-gray-500 text-sm font-normal">{m.desc}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -537,14 +576,17 @@
                         <div className="grid lg:grid-cols-2 gap-16 items-center">
                             <Reveal>
                                 <div>
-                                    <h2 className="text-4xl font-thin text-black mb-6">Perspectivas Futuras</h2>
-                                    <p className="text-gray-500 text-lg mb-8 leading-relaxed font-light">
+                                    {/* font-thin -> font-light */}
+                                    <h2 className="text-4xl font-light text-black mb-6">Perspectivas Futuras</h2>
+                                    {/* font-light -> font-normal */}
+                                    <p className="text-gray-500 text-lg mb-8 leading-relaxed font-normal">
                                         Hemotrace es un proyecto vivo. Planteamos mejoras realistas y asumibles para escalar la solución desde la universidad.
                                     </p>
                                     <div className="glass-card p-10 rounded-[2rem] bg-gradient-to-br from-white to-gray-50">
                                         <p className="text-xs text-gray-400 uppercase tracking-widest mb-2 font-bold">Inversión Total Estimada</p>
-                                        <p className="text-6xl font-thin text-gradient-gold">≈ 2.000 €</p>
-                                        <p className="mt-4 text-sm text-gray-500 font-light">Alto potencial de impacto sanitario con recursos optimizados.</p>
+                                        {/* font-thin -> font-light */}
+                                        <p className="text-6xl font-light text-gradient-gold">≈ 2.000 €</p>
+                                        <p className="mt-4 text-sm text-gray-500 font-normal">Alto potencial de impacto sanitario con recursos optimizados.</p>
                                     </div>
                                 </div>
                             </Reveal>
@@ -557,7 +599,7 @@
                                             <div key={i} className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100">
                                                 <div>
                                                     <h5 className="font-medium text-slate-800">{b.item}</h5>
-                                                    <p className="text-xs text-gray-400 font-light">{b.desc}</p>
+                                                    <p className="text-xs text-gray-400 font-normal">{b.desc}</p>
                                                 </div>
                                                 <span className="font-mono text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-lg text-sm">{b.cost} €</span>
                                             </div>
@@ -576,8 +618,9 @@
             <footer className="bg-[#f5f5f7] py-20 px-6 border-t border-gray-200">
                 <Reveal>
                     <div className="max-w-4xl mx-auto text-center space-y-8">
-                        <h2 className="text-3xl md:text-5xl font-thin text-black tracking-tight">Más que una idea,<br/>una realidad digital.</h2>
-                        <p className="text-gray-500 text-lg font-light">
+                        {/* font-thin -> font-light */}
+                        <h2 className="text-3xl md:text-5xl font-light text-black tracking-tight">Más que una idea,<br/>una realidad digital.</h2>
+                        <p className="text-gray-500 text-lg font-normal">
                             Hemotrace es el primer paso hacia una sanidad más eficiente, segura y organizada.
                             Desde la Universidad de Granada para el mundo.
                         </p>
